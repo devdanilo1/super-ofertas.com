@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descubra ofertas incríveis e produtos selecionados das melhores lojas.">
+    <title>OfertasTop - As Melhores Promoções</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        // Configuração do Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-primary': '#007BFF',
+                        'brand-secondary': '#FFC107', // Amarelo Amazon
+                        'brand-success': '#28A745',
+                        'brand-ml': '#FFE600',       // Amarelo Mercado Livre
+                        'brand-magalu': '#0086FF',   // Azul Magazine Luiza
+                        'brand-shopee': '#FF4D00',   // Laranja Shopee
+                        'light-bg': '#F8F9FA',
+                        'dark-text': '#212529',
+                        'medium-text': '#495057',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos para garantir que o footer fique no final */
+        html, body {
+            height: 100%;
+        }
+        .site-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .site-content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body class="antialiased bg-light-bg text-dark-text">
+    <div class="site-container">
+        <header class="bg-white shadow-lg sticky top-0 z-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="flex items-center space-x-2" aria-label="Página Inicial OfertasTop">
+                            <svg class="h-8 w-auto text-brand-primary" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12.75 15.6625L15.001 10.6118L16.9101 13.0899L12.75 15.6625ZM8.99902 13.0899L11.2491 10.6118L13.5 15.6625L8.99902 13.0899ZM11.3901 8.91013L9.08991 12.1118L12.001 16.3882L14.9101 12.1118L11.3901 8.91013Z"/></svg>
+                            <span class="text-3xl font-extrabold text-brand-primary hover:text-blue-700 transition-colors">OfertasTop</span>
+                        </a>
+                    </div>
+                    
+                    <nav class="hidden md:flex items-center space-x-4 flex-grow justify-center">
+                        <div class="relative flex items-center max-w-md w-full">
+                            <input type="text" id="searchInput" placeholder="Buscar ofertas..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm">
+                            <button id="searchButton" class="absolute right-0 top-0 bottom-0 px-3 py-2 text-gray-500 hover:text-brand-primary focus:outline-none" aria-label="Buscar">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </button>
+                        </div>
+                    </nav>
+
+                    <nav class="hidden md:flex items-center space-x-2 ml-4">
+                        <a href="index.html" class="text-gray-700 hover:text-brand-primary px-3 py-2 rounded-md text-base font-medium transition-colors">Página Inicial</a>
+                        <a href="contato.html" class="text-gray-700 hover:text-brand-primary px-3 py-2 rounded-md text-base font-medium transition-colors">Contato</a>
+                    </nav>
+                    
+                    <div class="md:hidden ml-4">
+                        <button id="mobileMenuButton" type="button" class="text-gray-600 hover:text-brand-primary focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Abrir menu</span>
+                            <svg class="h-7 w-7" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                 <!-- Menu Mobile -->
+                <div class="md:hidden hidden" id="mobile-menu">
+                    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                        <a href="index.html" class="block text-gray-700 hover:text-brand-primary px-3 py-2 rounded-md text-base font-medium transition-colors">Página Inicial</a>
+                        <a href="contato.html" class="block text-gray-700 hover:text-brand-primary px-3 py-2 rounded-md text-base font-medium transition-colors">Contato</a>
+                        <hr class="border-gray-200 my-2">
+                        <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Categorias</h3>
+                        <button class="category-button block w-full text-left text-gray-700 hover:text-brand-primary px-3 py-2 rounded-md text-base font-medium transition-colors" data-category="all">Todas</button>
+                        <button class="category-button block w-full text-left text-gray-700 hover:text-brand-primary px-3 py-2 rounded-md text-base font-medium transition-colors" data-category="eletronicos">Eletrônicos</button>
+                        <button class="category-button block w-full text-left text-gray-700 hover:text-brand-primary px-3 py-2 rounded-md text-base font-medium transition-colors" data-category="moda">Moda</button>
+                        <button class="category-button block w-full text-left text-gray-700 hover:text-brand-primary px-3 py-2 rounded-md text-base font-medium transition-colors" data-category="casa">Casa</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="site-content py-10 md:py-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10 md:mb-12">
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-dark-text leading-tight">
+                        As Melhores <span class="text-brand-primary">Ofertas</span> da Semana
+                    </h1>
+                    <p class="mt-4 text-lg text-medium-text max-w-2xl mx-auto"><span id="pageInfo">Carregando...</span></p>
+                </div>
+                
+                <!-- Filtros de Categoria (Visível apenas em Desktop) -->
+                <div class="hidden md:flex justify-center flex-wrap gap-2 mb-8">
+                    <button class="category-button text-gray-700 hover:text-brand-primary px-4 py-2 rounded-md text-base font-medium transition-colors" data-category="all">Todas</button>
+                    <button class="category-button text-gray-700 hover:text-brand-primary px-4 py-2 rounded-md text-base font-medium transition-colors" data-category="eletronicos">Eletrônicos</button>
+                    <button class="category-button text-gray-700 hover:text-brand-primary px-4 py-2 rounded-md text-base font-medium transition-colors" data-category="moda">Moda</button>
+                    <button class="category-button text-gray-700 hover:text-brand-primary px-4 py-2 rounded-md text-base font-medium transition-colors" data-category="casa">Casa</button>
+                </div>
+
+                <!-- Lista de Produtos -->
+                <div id="productList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-8">
+                    <!-- Os produtos serão inseridos aqui pelo JavaScript -->
+                </div>
+
+                <!-- Paginação -->
+                <nav class="mt-12 md:mt-16 flex justify-center" aria-label="Paginação">
+                    <ul class="inline-flex items-center -space-x-px shadow-sm rounded-md">
+                        <li>
+                            <button id="prevPageButton" class="rounded-l-md px-3 py-2 sm:px-4 sm:py-3 leading-tight text-gray-600 bg-white border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <span class="sr-only">Anterior</span>
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                            </button>
+                        </li>
+                        <li id="paginationNumbers" class="flex -space-x-px">
+                            <!-- Números da página serão inseridos aqui -->
+                        </li>
+                        <li>
+                            <button id="nextPageButton" class="rounded-r-md px-3 py-2 sm:px-4 sm:py-3 leading-tight text-gray-600 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                <span class="sr-only">Próxima</span>
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </main>
+
+        <footer class="bg-dark-text text-gray-300 py-10 md:py-12 mt-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-t border-gray-700 pt-8 text-center">
+                    <p class="text-sm text-gray-400">&copy; <span id="currentYear"></span> OfertasTop. Todos os direitos reservados.</p>
+                    <p class="text-xs text-gray-500 mt-2">Este site participa de programas de afiliados. Ao comprar através dos links, podemos receber uma comissão sem custo adicional para você. Isso nos ajuda a manter o site no ar e a trazer as melhores ofertas!</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- BANCO DE DADOS DE PRODUTOS ---
+            // Os produtos são armazenados aqui. Para adicionar, remover ou editar um produto,
+            // basta modificar os objetos dentro deste array.
+            // Estrutura de um produto:
+            // id: Número único para identificar o produto.
+            // name: Nome do produto (ex: "Smartphone Samsung").
+            // price: Preço atual da oferta (use ponto como separador decimal, ex: "1999.90").
+            // originalPrice: Preço original (opcional, para mostrar o desconto).
+            // store: Nome da loja (ex: "Amazon", "Magazine Luiza").
+            // category: Categoria do produto (ex: "eletronicos", "moda", "casa").
+            // image: URL da imagem do produto.
+            // affiliateLink: Link de afiliado para a página da oferta.
+            const products = [
+                { id: 1, name: "Smartphone Samsung Galaxy A56", price: "1979.00", originalPrice: "1978.00", store: "Magazine Luiza", category: "eletronicos", image: "https://a-static.mlcdn.com.br/1500x1500/smartphone-samsung-galaxy-a56-128gb-8gb-ram-5g-preto-tela-67-polegadas/carrefouroficial/900012877/315c928bc2a2ec5d4bf24e0aa9db3dc9.jpeg", affiliateLink: "https://magazineluiza.onelink.me/589508454/n6a1zc06" },
+                { id: 16, name: "Smartphone Motorola Moto 35", price: "900.59", originalPrice: "900.59", store: "Mercado Livre", category: "eletronicos", image: "https://http2.mlstatic.com/D_NQ_NP_2X_958828-MLA79890071338_102024-F.webp", affiliateLink: "https://mercadolivre.com/sec/1Peq4gv" },
+                { id: 17, name: "Apple Watch SE GPS Caixa Estelar de Alumínio", price: "2429.10", originalPrice: "2429.10", store: "Magazine Luiza", category: "eletronicos", image: "https://a-static.mlcdn.com.br/1500x1500/apple-watch-se-gps-caixa-estelar-de-aluminio-40mm-pulseira-esportiva-estelar-p-m/magazineluiza/238727900/ca440fed051ab3e2ace1fd2c87b6fcb1.jpg", affiliateLink: "https://magazineluiza.onelink.me/589508454/c7pdgyt2" },
+                { id: 19, name: "Bolsa Feminina Transversal Couro Sintético", price: "43.39", originalPrice: "43.39", store: "Mercado Livre", category: "moda", image: "https://http2.mlstatic.com/D_NQ_NP_2X_999523-MLA86594692089_062025-F.webp", affiliateLink: "https://mercadolivre.com/sec/2cXWuXC" },
+                { id: 21, name: "Console PlayStation 5 Slim", price: "3533.07", originalPrice: "3533.07", store: "Magazine Luiza", category: "eletronicos", image: "https://a-static.mlcdn.com.br/1500x1500/console-playstation-5-slim-sony-ssd-1tb-edicao-digital-com-controle-sem-fio-dualsense-branco-2-jogos-digitais-1000038914/kabum/542929/f1942be531ed7668009343fc2e821e4f.jpeg", affiliateLink: "https://magazineluiza.onelink.me/589508454/c3j9i5b8" },
+                { id: 22, name: "Air Fryer Philips Walita 4.5L", price: "849.12", originalPrice: "849.12", store: "Amazon", category: "casa", image: "https://m.media-amazon.com/images/I/61VeQo-UrhL._AC_.jpg", affiliateLink: "https://a.co/d/cuI9iYD" },
+                { id: 23, name: "Secador de Cabelo Profissional Lizze Extreme", price: "439.00", originalPrice: "439.00", store: "Mercado Livre", category: "casa", image: "https://http2.mlstatic.com/D_NQ_NP_2X_615001-MLU78851412477_082024-F.webp", affiliateLink: "https://mercadolivre.com/sec/2X8e5uU" },
+                { id: 25, name: "Monitor Gamer Samsung Odyssey G3 24''", price: "833.23", originalPrice: "", store: "Magazine Luiza", category: "eletronicos", image: "https://a-static.mlcdn.com.br/1500x1500/monitor-gamer-samsung-odyssey-g30-24-fhd-tela-plana-painel-va-144hz-1ms-hdmi-freesync-premium/samsung/3861/5fd78b2903b6ef1be39156e75d6ebe2b.jpeg", affiliateLink: "https://magazineluiza.onelink.me/589508454/6nfjy3w2" },
+                { id: 26, name: "Mouse Gamer HyperX Pulsefire Core", price: "446.46", originalPrice: "446.46", store: "Amazon", category: "eletronicos", image: "https://m.media-amazon.com/images/I/61QPXQvpVTL._AC_SL1500_.jpg", affiliateLink: "https://a.co/d/cikbnDk" },
+                { id: 27, name: "Teclado Mecânico Gamer Redragon Kumara K552", price: "294.54", originalPrice: "294.54", store: "Mercado Livre", category: "eletronicos", image: "https://http2.mlstatic.com/D_NQ_NP_635251-MLA74650243462_022024-O.webp", affiliateLink: "https://mercadolivre.com/sec/1z4WpMv" },
+                { id: 29, name: "Air Fryer Britânia Digital Inox BFR20PI 4,1L 1500W", price: "387.99", originalPrice: "387.99", store: "Magazine Luiza", category: "casa", image: "https://a-static.mlcdn.com.br/1500x1500/air-fryer-britania-digital-inox-bfr20pi-41l-1500w/afstoreprodutos/b64d2866aac711efb8214201ac18503c/1f964f44468a96d4f985db668ada58aa.jpeg", affiliateLink: "https://magazineluiza.onelink.me/589508454/jyndoxm9" },
+                { id: 30, name: "Máquina de Lavar Brastemp 13Kg", price: "2099.00", originalPrice: "2099.00", store: "Amazon", category: "casa", image: "https://m.media-amazon.com/images/I/51D+SSczRTL._AC_SL1000_.jpg", affiliateLink: "https://a.co/d/bqFWii2" },
+                { id: 31, name: "Geladeira Consul Frost Free 340L", price: "3159.00", originalPrice: "3159.00", store: "Mercado Livre", category: "casa", image: "https://http2.mlstatic.com/D_NQ_NP_2X_999249-MLA74779447669_022024-F.webp", affiliateLink: "https://mercadolivre.com/sec/2aRepLk" },
+                { id: 32, name: "Micro-ondas Efficient ME23S 23L Eletrolux", price: "754.90", originalPrice: "754.90", store: "Shopee", category: "casa", image: "https://down-br.img.susercontent.com/file/sg-11134201-7rd4r-luezfwf0j68674.webp", affiliateLink: "https://s.shopee.com.br/3VZ2vZ8iIe" },
+                { id: 33, name: "Tênis Adidas Adizero Drive RC Rio Feminino", price: "899.99", originalPrice: "899.99", store: "Magazine Luiza", category: "moda", image: "https://a-static.mlcdn.com.br/1500x1500/tenis-adidas-adizero-drive-rc-rio-feminino/netshoes/fba-3730-101-37/8e6b5097ccac12b88861e7947336c8f5.jpeg", affiliateLink: "https://magazineluiza.onelink.me/589508454/vvs7w9bu" },
+                { id: 34, name: "Moletom Agasalho Unissex Aberto Capuz e Ziper", price: "76.41", originalPrice: "76.41", store: "Amazon", category: "moda", image: "https://m.media-amazon.com/images/I/51UUPkeuKJL._AC_SX679_.jpg", affiliateLink: "https://a.co/d/hAfWkvd" },
+                { id: 35, name: "Conjunto de Moletom Nike Feminino", price: "122.31", originalPrice: "122.31", store: "Mercado Livre", category: "moda", image: "https://http2.mlstatic.com/D_NQ_NP_2X_984630-MLB83211448257_032025-F-conjunto-moletom-feminino-agasalho-inverno-combinado-p-ao-gg.webp", affiliateLink: "https://mercadolivre.com/sec/26R4h9g" },
+                { id: 36, name: "Aspirador Pó e Água Wap 1400w", price: "269.00", originalPrice: "269.00", store: "Shopee", category: "casa", image: "https://down-br.img.susercontent.com/file/sg-11134201-7rbkh-lq9j44dr7nlmf8.webp", affiliateLink: "https://s.shopee.com.br/gErZGk6Jv" },
+                { id: 37, name: "Robô Aspirador KaBuM! Smart 700", price: "799.00", originalPrice: "799.00", store: "Magazine Luiza", category: "casa", image: "https://a-static.mlcdn.com.br/1500x1500/robo-aspirador-e-passa-pano-kabum-smart-700-5-modos-de-limpeza-mapeamento-a-laser-3d-base-de-carregamento-preto-kbsf003/kabum/155444/698d5039521d715d1e4b01132ec05726.jpeg", affiliateLink: "https://magazineluiza.onelink.me/589508454/lfeb9urj" },
+                { id: 38, name: "Purificador de Água Electrolux PE10B", price: "649.00", originalPrice: "649.00", store: "Amazon", category: "casa", image: "https://m.media-amazon.com/images/I/51lj014yH6L._SL1000_.jpg", affiliateLink: "https://a.co/d/6wYHDm4" },
+                { id: 39, name: "Conjunto de Sofá 2 e 3 Lugares Suede", price: "1299.00", originalPrice: "1299.00", store: "Mercado Livre", category: "casa", image: "https://http2.mlstatic.com/D_NQ_NP_2X_833531-MLU75742613859_042024-F.webp", affiliateLink: "https://mercadolivre.com/sec/2hGWK3y" },
+                { id: 40, name: "Churrasqueira Elétrica Top Grill II", price: "109.20", originalPrice: "109.20", store: "Shopee", category: "casa", image: "https://down-br.img.susercontent.com/file/6ebec15ce4cd60e239836e25907f1d63.webp", affiliateLink: "https://s.shopee.com.br/2fzvxCZbA8" }
+            ];
+
+            const productsPerPage = 12;
+            let currentPage = 1;
+            let currentCategory = 'all';
+            let currentSearchTerm = '';
+
+            function getStoreBadgeColor(store) {
+                return {
+                    'Amazon': 'bg-brand-secondary text-black',
+                    'Mercado Livre': 'bg-brand-ml text-black',
+                    'Magazine Luiza': 'bg-brand-magalu text-white',
+                    'Shopee': 'bg-brand-shopee text-white'
+                }[store] || 'bg-gray-500 text-white';
+            }
+
+            function getStoreButtonColor(store) {
+                return {
+                    'Amazon': 'bg-brand-secondary hover:bg-yellow-500 text-black',
+                    'Mercado Livre': 'bg-brand-ml hover:bg-yellow-500 text-black',
+                    'Magazine Luiza': 'bg-brand-magalu hover:bg-blue-700 text-white',
+                    'Shopee': 'bg-brand-shopee hover:bg-orange-600 text-white'
+                }[store] || 'bg-brand-primary hover:bg-blue-700 text-white';
+            }
+
+            function renderProducts(productsArray) {
+                const productList = document.getElementById('productList');
+                if (!productList) return;
+                productList.innerHTML = '';
+
+                if (productsArray.length === 0) {
+                    productList.innerHTML = '<p class="col-span-full text-center text-medium-text text-lg">Nenhum produto encontrado para sua busca ou filtro.</p>';
+                    return;
+                }
+
+                productsArray.forEach(product => {
+                    const priceFormatted = parseFloat(product.price).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    const originalPriceFormatted = product.originalPrice ? parseFloat(product.originalPrice).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '';
+                    
+                    const productHTML = `
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="${product.category}">
+                            <div class="relative">
+                                <a href="${product.affiliateLink}" target="_blank" rel="noopener noreferrer">
+                                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-contain p-2">
+                                </a>
+                                <span class="absolute top-2 right-2 ${getStoreBadgeColor(product.store)} px-2 py-1 rounded text-xs font-bold">${product.store}</span>
+                            </div>
+                            <div class="p-4 flex flex-col flex-grow">
+                                <h3 class="text-base font-semibold text-dark-text mb-2 h-12 overflow-hidden" title="${product.name}">${product.name}</h3>
+                                <div class="flex-grow"></div>
+                                <div class="flex items-baseline justify-start mb-3">
+                                    <span class="text-2xl font-bold text-brand-primary">R$ ${priceFormatted}</span>
+                                    ${originalPriceFormatted && originalPriceFormatted !== priceFormatted ? `<del class="text-medium-text text-sm ml-2">R$ ${originalPriceFormatted}</del>` : ''}
+                                </div>
+                                <a href="${product.affiliateLink}" target="_blank" rel="noopener noreferrer" class="block w-full ${getStoreButtonColor(product.store)} font-bold text-center py-2 px-4 rounded-md transition-colors">
+                                    Ver Oferta
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    productList.innerHTML += productHTML;
+                });
+            }
+
+            function getFilteredProducts() {
+                let filtered = products;
+                if (currentCategory !== 'all') {
+                    filtered = filtered.filter(p => p.category === currentCategory);
+                }
+                if (currentSearchTerm) {
+                    const searchTermLower = currentSearchTerm.toLowerCase();
+                    filtered = filtered.filter(p =>
+                        p.name.toLowerCase().includes(searchTermLower) ||
+                        (p.description && p.description.toLowerCase().includes(searchTermLower)) ||
+                        p.category.toLowerCase().includes(searchTermLower) ||
+                        p.store.toLowerCase().includes(searchTermLower)
+                    );
+                }
+                return filtered;
+            }
+
+            function updatePagination() {
+                const filteredProducts = getFilteredProducts();
+                const totalProducts = filteredProducts.length;
+                const totalPages = Math.ceil(totalProducts / productsPerPage);
+                const paginationNumbers = document.getElementById('paginationNumbers');
+                const pageInfo = document.getElementById('pageInfo');
+                const prevPageButton = document.getElementById('prevPageButton');
+                const nextPageButton = document.getElementById('nextPageButton');
+
+                if (!paginationNumbers || !pageInfo || !prevPageButton || !nextPageButton) return;
+
+                paginationNumbers.innerHTML = '';
+                
+                currentPage = Math.max(1, Math.min(currentPage, totalPages || 1));
+
+                const maxPageButtons = 5;
+                let startPage = Math.max(1, currentPage - Math.floor(maxPageButtons / 2));
+                let endPage = Math.min(totalPages, startPage + maxPageButtons - 1);
+
+                if (endPage - startPage + 1 < maxPageButtons && totalPages >= maxPageButtons) {
+                    startPage = Math.max(1, endPage - maxPageButtons + 1);
+                }
+
+                if (startPage > 1) {
+                    paginationNumbers.innerHTML += `<button class="page-number px-3 py-2 sm:px-4 sm:py-3 leading-tight text-gray-600 bg-white border border-gray-300 hover:bg-gray-100" data-page="1">1</button>`;
+                    if (startPage > 2) {
+                        paginationNumbers.innerHTML += `<span class="px-3 py-2 sm:px-4 sm:py-3 leading-tight text-gray-600 bg-white border border-gray-300">...</span>`;
+                    }
+                }
+
+                for(let i = startPage; i <= endPage; i++) {
+                    const pageButton = `
+                        <button class="page-number px-3 py-2 sm:px-4 sm:py-3 leading-tight text-gray-600 bg-white border border-gray-300 hover:bg-gray-100 ${currentPage === i ? 'bg-brand-primary text-white hover:bg-blue-700' : ''}" data-page="${i}">
+                            ${i}
+                        </button>
+                    `;
+                    paginationNumbers.innerHTML += pageButton;
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        paginationNumbers.innerHTML += `<span class="px-3 py-2 sm:px-4 sm:py-3 leading-tight text-gray-600 bg-white border border-gray-300">...</span>`;
+                    }
+                    paginationNumbers.innerHTML += `<button class="page-number px-3 py-2 sm:px-4 sm:py-3 leading-tight text-gray-600 bg-white border border-gray-300 hover:bg-gray-100" data-page="${totalPages}">${totalPages}</button>`;
+                }
+
+                if (totalProducts === 0) {
+                    pageInfo.textContent = 'Nenhum produto encontrado.';
+                } else {
+                    const startProduct = (currentPage - 1) * productsPerPage + 1;
+                    const endProduct = Math.min(currentPage * productsPerPage, totalProducts);
+                    pageInfo.textContent = `Mostrando ${startProduct}-${endProduct} de ${totalProducts} produtos`;
+                }
+
+                prevPageButton.disabled = currentPage === 1;
+                nextPageButton.disabled = currentPage === totalPages || totalPages === 0;
+            }
+
+            function showPage(page) {
+                currentPage = page;
+                const filteredProducts = getFilteredProducts();
+                const start = (page - 1) * productsPerPage;
+                const end = start + productsPerPage;
+                renderProducts(filteredProducts.slice(start, end));
+                updatePagination();
+            }
+
+            document.getElementById('nextPageButton').addEventListener('click', () => {
+                const filteredProducts = getFilteredProducts();
+                const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+                if(currentPage < totalPages) showPage(currentPage + 1);
+            });
+
+            document.getElementById('prevPageButton').addEventListener('click', () => {
+                if(currentPage > 1) showPage(currentPage - 1);
+            });
+
+            document.getElementById('paginationNumbers').addEventListener('click', (e) => {
+                if(e.target.classList.contains('page-number') && e.target.dataset.page) {
+                    showPage(parseInt(e.target.dataset.page));
+                }
+            });
+
+            document.querySelectorAll('.category-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    currentCategory = button.dataset.category;
+                    currentPage = 1;
+                    showPage(currentPage);
+                });
+            });
+
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+
+            function performSearch() {
+                currentSearchTerm = searchInput.value;
+                currentPage = 1;
+                showPage(currentPage);
+            }
+
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            // Lógica do Menu Mobile
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Inicializa a página
+            showPage(1);
+
+            // Atualiza o ano no rodapé
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
